@@ -60,4 +60,13 @@ public class BookEntity {
     public void setStudent(StudentEntity student) {
         this.students = student;
     }
+
+    @Override
+    public String toString() {
+        return "BookEntity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", writer='" + writer + '\'' +
+                '}';
+    }
 }

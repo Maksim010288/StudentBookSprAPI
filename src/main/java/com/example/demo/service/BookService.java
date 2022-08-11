@@ -12,18 +12,18 @@ import org.springframework.stereotype.Service;
 public class BookService {
 
     @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     @Autowired
-    StudentRepository studentRepository;
+    private StudentRepository studentRepository;
 
-    public BookModel createBook(BookEntity book, Integer idStudent){
+    public BookModel createBook(BookEntity book, Integer idStudent) {
         StudentEntity student = studentRepository.findById(idStudent).get();
         book.setStudent(student);
         return BookModel.toModel(bookRepository.save(book));
     }
 
-    public BookModel complete(Integer id){
+    public BookModel getBook(Integer id) {
         BookEntity book = bookRepository.findById(id).get();
         book.setId(book.getId());
         return BookModel.toModel(bookRepository.save(book));

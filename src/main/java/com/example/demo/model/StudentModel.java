@@ -11,7 +11,7 @@ public class StudentModel {
    private final String writer;
    private List<BookModel> books;
 
-    public static StudentModel tuModel(StudentEntity entity){
+    public static StudentModel toModel(StudentEntity entity){
         StudentModel student = new StudentModel(entity.getId(), entity.getSurName(), entity.getName());
         student.setBooks(entity.getBooks().stream().map(BookModel::toModel).collect(Collectors.toList()));
         return student;

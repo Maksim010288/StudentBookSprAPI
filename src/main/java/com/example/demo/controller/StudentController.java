@@ -7,26 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/student")
+@RequestMapping(value = "/students")
 public class StudentController {
 
     @Autowired
-    StudentService studentService;
+    private StudentService studentService;
 
-    @PostMapping(value = "/create")
+    @PostMapping
     public StudentModel create(String surName, String name) {
         StudentEntity student = new StudentEntity(surName, name);
         return studentService.create(student);
     }
 
-    @GetMapping(value = "/getOne")
-    public StudentModel getOneStudent(Integer id) {
+    @GetMapping("/{id}")
+    public StudentModel getOneStudent(@PathVariable Integer id) {
          return studentService.getOne(id);
         }
 
-
-    @DeleteMapping(value = "/deleteById")
-    public void deleteById(Integer id){
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Integer id){
         studentService.delete(id);
     }
 }

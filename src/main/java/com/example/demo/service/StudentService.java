@@ -15,12 +15,12 @@ public class StudentService {
 
 
     public StudentModel create(StudentEntity student) {
-        return StudentModel.tuModel(studentRepository.save(student));
+        return StudentModel.toModel(studentRepository.save(student));
     }
 
     public StudentModel getOne(Integer id) {
         StudentEntity studentEntity = studentRepository.findById(id).get();
-        return StudentModel.tuModel(studentEntity);
+        return StudentModel.toModel(studentEntity);
     }
 
     public void delete(Integer id) {

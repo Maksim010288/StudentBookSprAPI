@@ -40,4 +40,13 @@ public class BookModel {
     public void setWriter(String writer) {
         this.writer = writer;
     }
+
+    @Override
+    public String toString() {
+        return "BookModel{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", writer='" + writer + '\'' +
+                '}';
+    }
 }
