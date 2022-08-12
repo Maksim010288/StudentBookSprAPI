@@ -6,7 +6,11 @@ import com.example.demo.model.BookModel;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -17,16 +21,16 @@ public class BookService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public BookModel createBook(BookEntity book, Integer idStudent) {
+    public BookEntity createBook(BookEntity book, Integer idStudent) {
         StudentEntity student = studentRepository.findById(idStudent).get();
         book.setStudent(student);
-        return BookModel.toModel(bookRepository.save(book));
+        return bookRepository.save(book);
     }
+
 
     public BookModel getBook(Integer id) {
         BookEntity book = bookRepository.findById(id).get();
         book.setId(book.getId());
-        return BookModel.toModel(bookRepository.save(book));
+        return BookModel.toModelBook(bookRepository.save(book));
     }
-
 }

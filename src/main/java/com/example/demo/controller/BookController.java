@@ -14,8 +14,8 @@ public class BookController {
     BookService bookService;
 
     @PostMapping(value = "/students/{studentId}/books", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public BookModel addBook(@RequestBody BookEntity book, @PathVariable Integer studentId) {
-        return bookService.createBook(book, studentId);
+    public BookModel addBooks(@RequestBody BookEntity book, @PathVariable Integer studentId) {
+        return BookModel.toModelBook(bookService.createBook(book, studentId));
     }
 
     @GetMapping("/books/{id}")
