@@ -13,7 +13,7 @@ public class StudentModel {
 
     public static StudentModel toModel(StudentEntity entity){
         StudentModel student = new StudentModel(entity.getId(), entity.getSurName(), entity.getName());
-        student.setBooks(entity.getBooks().stream().map(BookModel::toModel).collect(Collectors.toList()));
+        student.setBooks(entity.getBooks().stream().map(BookModel::toModelBook).collect(Collectors.toList()));
         return student;
     }
 
