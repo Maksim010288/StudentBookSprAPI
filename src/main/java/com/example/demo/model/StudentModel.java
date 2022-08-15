@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StudentModel {
-   private final Integer id;
+   private Integer id;
    private final String title;
    private final String writer;
    private List<BookModel> books;
@@ -19,6 +19,11 @@ public class StudentModel {
 
     public StudentModel(Integer id, String title, String writer) {
         this.id = id;
+        this.title = title;
+        this.writer = writer;
+    }
+
+    public StudentModel(String title, String writer) {
         this.title = title;
         this.writer = writer;
     }

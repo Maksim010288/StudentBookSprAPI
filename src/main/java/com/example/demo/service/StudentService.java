@@ -1,10 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.StudentEntity;
-import com.example.demo.model.StudentModel;
 import com.example.demo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Service
@@ -14,13 +15,17 @@ public class StudentService {
     private StudentRepository studentRepository;
 
 
-    public StudentModel create(StudentEntity student) {
-        return StudentModel.toModel(studentRepository.save(student));
+    public StudentEntity create(StudentEntity student) {
+        return studentRepository.save(student);
     }
 
-    public StudentModel getOne(Integer id) {
-        StudentEntity studentEntity = studentRepository.findById(id).get();
-        return StudentModel.toModel(studentEntity);
+    public StudentEntity getOne(Integer id) {
+        return studentRepository.findById(id).get();
+    }
+
+    public StudentEntity update(Integer id, StudentEntity entity) {
+        entity.setId(id);
+        return studentRepository.saveAndFlush(entity);
     }
 
     public void delete(Integer id) {
