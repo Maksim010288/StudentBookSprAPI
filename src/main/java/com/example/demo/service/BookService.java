@@ -28,9 +28,23 @@ public class BookService {
     }
 
 
-    public BookModel getBook(Integer id) {
+    public BookEntity getBook(Integer id) {
         BookEntity book = bookRepository.findById(id).get();
         book.setId(book.getId());
-        return BookModel.toModelBook(bookRepository.save(book));
+        return bookRepository.save(book);
+    }
+
+    public BookEntity updateBook(BookEntity bookEntity, Integer idStudents, Integer idBook) {
+        StudentEntity studentEntity = studentRepository.findById(idStudents).get();
+        bookEntity.setStudent(studentEntity);
+        bookEntity.setId(idBook);
+        return bookRepository.saveAndFlush(bookEntity);
+    }
+
+    public BookEntity deleteBook(Integer id) {
+        BookEntity bookEntity = bookRepository.findById(id).get();
+        bookEntity.setId(bookEntity.getId());
+        bookRepository.delete(bookEntity);
+        return bookEntity;
     }
 }
