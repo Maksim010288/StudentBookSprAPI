@@ -13,15 +13,20 @@ public class StudentEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "pasport_number")
+    private int passportNumber;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "students")
     private List<BookEntity> books;
 
-    public StudentEntity(){}
+    public StudentEntity() {
+    }
 
 
-    public StudentEntity(String sur_name, String name) {
+    public StudentEntity(String sur_name, String name, int passportNumber) {
         this.surName = sur_name;
         this.name = name;
+        this.passportNumber = passportNumber;
     }
 
     public int getId() {
@@ -54,5 +59,13 @@ public class StudentEntity {
 
     public void setBooks(List<BookEntity> books) {
         this.books = books;
+    }
+
+    public int getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(int passportNumber) {
+        this.passportNumber = passportNumber;
     }
 }
