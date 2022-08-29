@@ -29,6 +29,13 @@ public class BookEntity {
         this.writer = writer;
     }
 
+    public BookEntity(Integer id, String title, String writer, StudentEntity student) {
+        this.id = id;
+        this.title = title;
+        this.writer = writer;
+        this.students = student;
+    }
+
     public int getId() {
         return id;
     }

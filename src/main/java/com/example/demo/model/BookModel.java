@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.example.demo.entity.BookEntity;
+import com.example.demo.entity.StudentEntity;
 
 
 public class BookModel {

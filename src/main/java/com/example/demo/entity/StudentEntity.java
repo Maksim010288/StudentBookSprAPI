@@ -3,7 +3,8 @@ package com.example.demo.entity;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "student")
+@Entity
+@Table(name = "student")
 public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +15,7 @@ public class StudentEntity {
     private String name;
 
     @Column(name = "pasport_number")
-    private int passportNumber;
+    private Integer passportNumber;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "students")
     private List<BookEntity> books;
@@ -22,9 +23,15 @@ public class StudentEntity {
     public StudentEntity() {
     }
 
+    public StudentEntity(String surName, String name, Integer passportNumber) {
+        this.surName = surName;
+        this.name = name;
+        this.passportNumber = passportNumber;
+    }
 
-    public StudentEntity(String sur_name, String name, int passportNumber) {
-        this.surName = sur_name;
+    public StudentEntity(int id, String surName, String name, Integer passportNumber) {
+        this.id = id;
+        this.surName = surName;
         this.name = name;
         this.passportNumber = passportNumber;
     }

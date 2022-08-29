@@ -2,19 +2,17 @@ package com.example.demo.service;
 
 import com.example.demo.entity.StudentEntity;
 import com.example.demo.repository.StudentRepository;
-import com.example.demo.validation.Validator;
-import org.hibernate.mapping.Collection;
+import com.example.demo.validation.StudentsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
 public class StudentService {
-    private final Validator validator = new Validator();
+    private final StudentsValidator validator = new StudentsValidator();
     @Autowired
     private StudentRepository studentRepository;
 
@@ -33,6 +31,7 @@ public class StudentService {
         List<StudentEntity> studentEntities = new ArrayList<>();
         for (StudentEntity student : studentRepository.findAll()) {
             StudentEntity model = new StudentEntity(
+                    student.getId(),
                     student.getName(),
                     student.getSurName(),
                     student.getPassportNumber());

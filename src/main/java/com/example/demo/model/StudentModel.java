@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class StudentModel {
    private Integer id;
-   private final String title;
-   private final String writer;
+   private final String name;
+   private final String surName;
    private List<BookModel> books;
 
     public static StudentModel toModel(StudentEntity entity){
@@ -17,27 +17,22 @@ public class StudentModel {
         return student;
     }
 
-    public StudentModel(Integer id, String title, String writer) {
+    public StudentModel(Integer id, String surName, String name) {
         this.id = id;
-        this.title = title;
-        this.writer = writer;
-    }
-
-    public StudentModel(String title, String writer) {
-        this.title = title;
-        this.writer = writer;
+        this.surName = surName;
+        this.name = name;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public String getWriter() {
-        return writer;
+    public String getSurName() {
+        return surName;
     }
 
     public List<BookModel> getBooks() {

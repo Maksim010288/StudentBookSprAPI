@@ -4,7 +4,7 @@ import com.example.demo.entity.StudentEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Validator {
+public class StudentsValidator {
 
     public void validates(StudentEntity studentEntity) {
         if (studentEntity.getName() == null || studentEntity.getName().isEmpty() ||
