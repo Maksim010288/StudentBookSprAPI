@@ -1,21 +1,15 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.StudentEntity;
-import com.example.demo.model.BookModel;
 import com.example.demo.model.StudentModel;
 import com.example.demo.service.StudentService;
-import com.example.demo.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class StudentController {
@@ -26,8 +20,7 @@ public class StudentController {
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity create(@RequestBody StudentEntity studentEntity) {
         StudentEntity student = new StudentEntity(studentEntity.getSurName(),
-                studentEntity.getName(),
-                studentEntity.getPassportNumber());
+                studentEntity.getName(), studentEntity.getPassportNumber());
         studentService.create(student);
         return ResponseEntity.badRequest().body("Added: " + student.getSurName() + " " + student.getName());
     }
@@ -38,7 +31,7 @@ public class StudentController {
         return ResponseEntity.badRequest().body(studentModel);
     }
 
-    @GetMapping("student/getAll")
+    @GetMapping(value = "students/getAll")
     public List<StudentEntity> getAll() {
         List<StudentEntity> studentEntities = new ArrayList<>();
         studentEntities.addAll(studentService.getAll());
