@@ -9,50 +9,14 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.Md4PasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
-
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 public class WebSecurity {
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(User.withDefaultPasswordEncoder()
-//                .username("anton")
-//                .password("12345")
-//                .roles("user")
-//                .build());
-//        manager.createUser(User.withDefaultPasswordEncoder()
-//                .username("maks")
-//                .password("12345")
-//                .roles("admin")
-//                .build());
-//        return manager;
-//    }
-
-//    @Bean
-//    public JdbcUserDetailsManager users(DataSource dataSource){
-//        UserDetails admin = User.builder().username("maks").password("12345").roles("admin").build();
-//        UserDetails user = User.builder().username("anton").password("12345").roles("user").build();
-//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-//        if (jdbcUserDetailsManager.userExists(admin.getUsername())){
-//            jdbcUserDetailsManager.deleteUser(admin.getUsername());
-//        }
-//        jdbcUserDetailsManager.createUser(admin);
-//        if (jdbcUserDetailsManager.userExists(user.getUsername())){
-//            jdbcUserDetailsManager.deleteUser(user.getUsername());
-//        }
-//        jdbcUserDetailsManager.createUser(user);
-//        return jdbcUserDetailsManager;
-//    }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -65,24 +29,19 @@ public class WebSecurity {
                 .formLogin(withDefaults())
                 .httpBasic(withDefaults());
         return http.build();
-
     }
 
     @Autowired
     private UserService userService;
 
-
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
-
     @Bean
     public static PasswordEncoder passwordEncoder() {
-       // return NoOpPasswordEncoder.getInstance();
          return new BCryptPasswordEncoder();
     }
-
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
