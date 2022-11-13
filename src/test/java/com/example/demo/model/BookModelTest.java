@@ -4,7 +4,7 @@ import com.example.demo.entity.BookEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class BookModelTest {
+class  BookModelTest {
     BookEntity entity = new BookEntity("Анна Каренина", "Антон Павлович Чехов");
     BookModel model = new BookModel(4, "Анна Каренина", "Антон Павлович Чехов");
 
