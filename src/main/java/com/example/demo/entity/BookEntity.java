@@ -37,4 +37,12 @@ public class BookEntity {
         this.writer = writer;
         this.students = student;
     }
+
+    public StudentEntity getStudent() {
+        return students;
+    }
+
+    public void setStudent(StudentEntity student) {
+        this.students = student;
+    }
 }
