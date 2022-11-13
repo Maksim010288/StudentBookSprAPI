@@ -1,8 +1,11 @@
 package com.example.demo.entity;
 
-import javax.persistence.*;
-import java.util.List;
+import lombok.Data;
+import lombok.Getter;
 
+import javax.persistence.*;
+
+@Data
 @Entity
 @Table(name = "roles")
 public class RolesEntity {
@@ -13,15 +16,6 @@ public class RolesEntity {
 
     @Column(name = "name")
     private String name;
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
 }
 
 

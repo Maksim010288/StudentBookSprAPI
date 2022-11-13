@@ -1,12 +1,14 @@
 package com.example.demo.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
+@Data
 @Entity(name = "book")
 public class BookEntity {
     @Id
@@ -34,42 +36,5 @@ public class BookEntity {
         this.title = title;
         this.writer = writer;
         this.students = student;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getWriter() {
-        return writer;
-    }
-
-    public StudentEntity getStudent() {
-        return students;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
-
-    public void setStudent(StudentEntity student) {
-        this.students = student;
-    }
-
-    @Override
-    public String toString() {
-        return title + " - " + writer;
     }
 }

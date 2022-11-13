@@ -1,8 +1,11 @@
 package com.example.demo.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "student")
 public class StudentEntity {
@@ -32,46 +35,6 @@ public class StudentEntity {
         this.id = id;
         this.surName = surName;
         this.name = name;
-        this.passportNumber = passportNumber;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getSurName() {
-        return surName;
-    }
-
-    public void setSurName(String surName) {
-        this.surName = surName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<BookEntity> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<BookEntity> books) {
-        this.books = books;
-    }
-
-    public int getPassportNumber() {
-        return passportNumber;
-    }
-
-    public void setPassportNumber(int passportNumber) {
         this.passportNumber = passportNumber;
     }
 }
