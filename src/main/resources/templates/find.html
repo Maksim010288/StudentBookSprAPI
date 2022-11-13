@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Student</title>
+</head>
+<body>
+<div id="bloc_1" class="container mt-5" th:scrolling="yes">
+    <h1 class="hidden">Students</h1>
+    <div class="alert alert_info mt-5 color-red" th:each="st : ${studentsList}">
+        <h3 class="studentsList" th:text="${st.getId()} +'. ' +${st.getName()} +' ' + ${st.getSurName()}"></h3>
+        <div th:each="book : ${st.getBooks()}">
+            <h5 th:text="${book.getWriter() + ': ' + book.getTitle()}"></h5>
+        </div>
+    </div>
+</div>
+
+<form class="formBlocOne" action="/stud/add" method="get">
+    <button type="submit">Записать</button>
+</form>
+
+<style>
+    #bloc_1 {
+        width: 50%;
+        height: 300px;
+        padding: 10px;
+        display: block;
+        margin: 20px 20px 20px 0;
+        background: aliceblue;
+        border: 2px solid black;
+        overflow-y: auto;
+        scroll-snap-type: x;
+        font-family: "Calibri Light", Calibri Light, serif;
+    }
+
+    .container {
+        width: 50%;
+        height: 100px;
+        padding: 10px;
+        display: block;
+        margin: 20px 20px 20px 0;
+        background: aliceblue;
+        border: 2px solid black;
+        overflow-y: auto;
+        scroll-snap-type: x;
+        font-family: "Calibri Light", Calibri Light, serif;
+    }
+
+    .hidden {
+        background: blue;
+        text-align: center;
+        color: aquamarine;
+        font-family: "Calibri Light", serif;
+        border-bottom: 2px solid red;
+    }
+
+    .studentsList {
+        border-bottom: 2px solid black;
+        scroll-snap-align: start;
+    }
+</style>
+</body>
+</html>

@@ -1,46 +1,96 @@
 package com.example.demo.security;
 
+import com.example.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.Md4PasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
-public class WebSecurity extends WebSecurityConfigurerAdapter {
+public class WebSecurity {
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("maks").password("12345").roles("ADMIN")
-                .and()
-                .withUser("anton").password("12345").roles("USER");
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//        manager.createUser(User.withDefaultPasswordEncoder()
+//                .username("anton")
+//                .password("12345")
+//                .roles("user")
+//                .build());
+//        manager.createUser(User.withDefaultPasswordEncoder()
+//                .username("maks")
+//                .password("12345")
+//                .roles("admin")
+//                .build());
+//        return manager;
+//    }
+
+//    @Bean
+//    public JdbcUserDetailsManager users(DataSource dataSource){
+//        UserDetails admin = User.builder().username("maks").password("12345").roles("admin").build();
+//        UserDetails user = User.builder().username("anton").password("12345").roles("user").build();
+//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        if (jdbcUserDetailsManager.userExists(admin.getUsername())){
+//            jdbcUserDetailsManager.deleteUser(admin.getUsername());
+//        }
+//        jdbcUserDetailsManager.createUser(admin);
+//        if (jdbcUserDetailsManager.userExists(user.getUsername())){
+//            jdbcUserDetailsManager.deleteUser(user.getUsername());
+//        }
+//        jdbcUserDetailsManager.createUser(user);
+//        return jdbcUserDetailsManager;
+//    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeRequests(authorize -> authorize
+                        .antMatchers("/users",
+                                "/error")
+                        .permitAll()
+                        .anyRequest().authenticated())
+                .formLogin(withDefaults())
+                .httpBasic(withDefaults());
+        return http.build();
+
     }
 
+    @Autowired
+    private UserService userService;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .antMatchers("/").hasRole("ADMIN")
-                .antMatchers("/students{id}").hasRole("ADMIN")
-                .antMatchers("/books/{id}").hasRole("ADMIN")
-                .antMatchers("/students/{studentId}/books").hasRole("ADMIN")
-                .antMatchers("/students/{studentId}/books/{bookId}").hasRole("ADMIN")
-                .antMatchers("/books/{id}").hasRole("ADMIN")
-                .antMatchers("/books/getAll").hasRole("USER")
-                .antMatchers("/students{id}").hasRole("USER")
-                .antMatchers("/students/getAll").hasRole("USER")
-                .and().httpBasic()
-                .and().logout().logoutSuccessUrl("/");
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
 
     @Bean
-    public PasswordEncoder encoder(){
-        return NoOpPasswordEncoder.getInstance();
+    public static PasswordEncoder passwordEncoder() {
+       // return NoOpPasswordEncoder.getInstance();
+         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(userService);
+        return daoAuthenticationProvider;
+    }
+
+
+
 }

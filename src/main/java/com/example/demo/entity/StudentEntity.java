@@ -13,8 +13,7 @@ public class StudentEntity {
     private String surName;
     @Column(name = "name")
     private String name;
-
-    @Column(name = "pasport_number")
+    @Column(name = "passport_number")
     private Integer passportNumber;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "students")

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>StudentById</title>
+
+</head>
+<body>
+
+<h1>Find by id</h1>
+<form class="formBloc" action="/student/findById" method="get">
+        <input type="text" name="id" placeholder="search by id" class="form-control"/>
+    <button type="submit" class="bth bth-success">Search</button>
+</form>
+
+<div class="div">
+    <h1 class="hidden">Students</h1>
+    <div th:each="st : ${list} " class="div1">
+        <h3 th:text="${st.getId()} + ')' + ${st.getName()} + ' ' + ${st.getSurName()} + ' № паспорта АВ:' + ${st.getPassportNumber()}"></h3>
+        <div th:each="boks : ${st.getBooks()}" class="booksStudent">
+            <h6 th:text="${boks.getWriter()} + ' ' + ${boks.getTitle()}"></h6>
+        </div>
+    </div>
+</div>
+
+<!--/*@thymesVar id="str" type=""*/-->
+<p th:text="${str}"></p>
+<style>
+
+    .hidden {
+        background: blue;
+        text-align: center;
+        color: aquamarine;
+        font-family: "Calibri Light", serif;
+        border-bottom: 2px solid red;
+    }
+
+    .div{
+        width: 40%;
+        height: 100px;
+        background: olivedrab;
+    }
+
+</style>
+</body>
+</html>

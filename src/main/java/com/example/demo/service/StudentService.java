@@ -49,7 +49,7 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    private void validPassportNumbers(StudentEntity student) {
+    public void validPassportNumbers(StudentEntity student) {
         List<StudentEntity> studentEntities = getAll();
         for (StudentEntity studentEntity : studentEntities) {
             if (studentEntity.getPassportNumber() == student.getPassportNumber()) {

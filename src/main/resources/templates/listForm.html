@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Student</title>
+    <style>
+        .formBloc {
+            width: 25%;
+            padding: 10px;
+            border: 1px solid black;
+            background: aliceblue;
+        }
+        .form-control{
+            margin-bottom: 3px;
+            color: blue;
+            border: 2px solid red;
+            background: ghostwhite;
+        }
+
+        .bth{
+            color: white;
+            font-family: "sans-serif", sans-serif;
+            background: blue;
+            border-bottom: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+<h1>Added new student</h1>
+<form class="formBloc" action="/stud/add" method="post">
+    <input type="text" name="name" placeholder="added name" class="form-control">
+    <input type="text" name="surName" placeholder="added surName" class="form-control">
+    <input type="text" name="passport" placeholder="added number passport" class="form-control">
+    <button type="submit" class="bth bth-success">Record</button>
+</form>
+
+</body>
+</html>

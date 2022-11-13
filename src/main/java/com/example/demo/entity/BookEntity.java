@@ -70,10 +70,6 @@ public class BookEntity {
 
     @Override
     public String toString() {
-        return "BookEntity{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", writer='" + writer + '\'' +
-                '}';
+        return title + " - " + writer;
     }
 }
