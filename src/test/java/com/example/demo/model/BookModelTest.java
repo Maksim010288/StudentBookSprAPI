@@ -4,24 +4,13 @@ import com.example.demo.entity.BookEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class  BookModelTest {
+class BookModelTest {
     BookEntity entity = new BookEntity("Анна Каренина", "Антон Павлович Чехов");
-    BookModel model = new BookModel(4, "Анна Каренина", "Антон Павлович Чехов");
-
-
-    @Test
-    void getId() {
-        Integer id = 4;
-        Assertions.assertEquals(id, model.getId());
-    }
+    BookModel modelBook = new BookModel(4, "Анна Каренина", "Антон Павлович Чехов");
 
     @Test
     void toModel() {
         entity.setId(4);
-        Assertions.assertEquals(model.toString(), BookModel.toModelBook(entity).toString());
-    }
-
-    @Test
-    void getWriter() {
+        Assertions.assertEquals(modelBook.toString(), BookModel.toModelBook(entity).toString());
     }
 }
