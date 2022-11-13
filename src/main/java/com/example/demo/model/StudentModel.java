@@ -1,10 +1,16 @@
 package com.example.demo.model;
 
 import com.example.demo.entity.StudentEntity;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
+@Getter
+@Setter
 public class StudentModel {
    private Integer id;
    private final String name;
@@ -21,25 +27,5 @@ public class StudentModel {
         this.id = id;
         this.surName = surName;
         this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurName() {
-        return surName;
-    }
-
-    public List<BookModel> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<BookModel> books) {
-        this.books = books;
     }
 }

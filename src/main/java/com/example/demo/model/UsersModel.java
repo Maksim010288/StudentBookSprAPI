@@ -1,7 +1,9 @@
 package com.example.demo.model;
 
 import com.example.demo.entity.UserEntity;
+import lombok.Data;
 
+@Data
 public class UsersModel {
     private final String userName;
     private final String password;
@@ -17,17 +19,5 @@ public class UsersModel {
         return new UsersModel(userEntity.getUsername(),
                 String.valueOf(userEntity.getPassword()),
                 userEntity.getEmail());
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
     }
 }

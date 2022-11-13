@@ -2,8 +2,15 @@ package com.example.demo.model;
 
 import com.example.demo.entity.BookEntity;
 import com.example.demo.entity.StudentEntity;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-
+@Data
+@Getter
+@Setter
+@ToString
 public class BookModel {
     private Integer id;
     private String title;
@@ -19,39 +26,5 @@ public class BookModel {
 
     public static BookModel toModelBook(BookEntity entity){
         return new BookModel(entity.getId(), entity.getTitle(), entity.getWriter());
-    }
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getWriter() {
-        return writer;
-    }
-
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
-
-    @Override
-    public String toString() {
-        return "BookModel{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", writer='" + writer + '\'' +
-                '}';
     }
 }
